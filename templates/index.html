@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <hr>
+    <h3>{{ date }}</h3>
+    <nav style="margin: auto">
+        <ul class="pagination pagination-sm justify-content-center" id="pag">
+            <li class="page-item">
+                <form action="/" method="post">
+                    <input type="hidden" name="action" value="date">
+                    <input type="hidden" name="delta" value="-1">
+                    <input type="hidden" name="current" value="{{ date }}">
+                    <a class="page-link" onclick="this.closest('form').submit()">&laquo;</a>
+                </form>
+            </li>
+            <li>
+                <form action="/" method="post">
+                    <input type="hidden" name="action" value="date">
+                    <input type="hidden" name="delta" value="1">
+                    <input type="hidden" name="current" value="{{ date }}">
+                    <a class="page-link rounded-end" onclick="this.closest('form').submit()">&raquo;</a>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <hr>
+    <table class="table table-borderless table-sm fixed-width" id="sortableTable">
+        <tbody>
+            <tr>
+                <th scope="row">Calories</th>
+                <td>{{ sums["calories"] }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Carbohydrates</th>
+                <td>{{ sums["carbs"] }} g</td>
+            </tr>
+            <tr>
+                <th scope="row">Protein</th>
+                <td>{{ sums["protein"] }} g</td>
+            </tr>
+            <tr>
+                <th scope="row">Fat</th>
+                <td>{{ sums["fat"] }} g</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="table table-hover"> 
+        <thead>
+            <th scope="col">Description</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Serving (g)</th>
+                <th scope="col">Calories</th>
+                <th scope="col">Carbohydrate (g)</th>
+                <th scope="col">Protein (g)</th>
+                <th scope="col">Fat (g)</th>
+                <th></th>
+                <th></th>
+        </thead>
+        <tbody>
+            {% for food in foods %}
+            <tr>
+                <td>{{ food.description }}</td>
+                <td>{{ food.brand }}</td>
+                <td>{{ food.serving }}</td>
+                <td>{{ food.calories }}</td>
+                <td>{{ food.carbs }}</td>
+                <td>{{ food.protein }}</td>
+                <td>{{ food.fat }}</td>
+                <td>
+                    <form action="/edit" method="get">
+                        <input type="hidden" name="food" value="{{ food }}"/>
+                        <button class="btn" type="submit">
+                            <b style="color: rgb(23,107,139);">Edit</b>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/" method="post">
+                        <input type="hidden" name="action" value="remove">
+                        <input type="hidden" name="food" value="{{ food }}">
+                        <input type="hidden" name="date" value="{{ date }}">
+                        <button class="btn" type="submit">
+                            <svg xmlns="/static/x-circle-fill.svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

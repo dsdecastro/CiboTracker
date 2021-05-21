@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Food
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <th scope="col">Description</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Serving</th>
+                <th scope="col">Calories</th>
+                <th scope="col">Carbohydrate (g)</th>
+                <th scope="col">Protein (g)</th>
+                <th scope="col">Fat (g)</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><bold>{{ food["description"] }}</bold></td>
+                <td>{{ food["brand"] }}</td>
+                <td>{{ food["serving"] }}</td>
+                <td>{{ food["calories"] }}</td>
+                <td>{{ food["carbs"] }}</td>
+                <td>{{ food["protein"] }}</td>
+                <td>{{ food["fat"] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form action="/edit" method="post">
+        <div class="form-group">
+            Enter serving size in grams
+            <br>
+            <small>(Values listed per 100g serving)</small>
+        </div>
+        <div class="form-group">
+            <input id="serving" autocomplete="off" autofocus class="form-control" name="serving" placeholder="100" type="number">
+        </div>
+        <input type="hidden" name="food" value="{{ food }}">
+        <button id="submit" class="btn btn-primary" type="submit" disabled="disabled">Save Changes</button>
+    </form>
+
+    <!-- Don't allow user to enter food into log until #serving has been filled -->
+    <script>
+        $('#serving').bind('keyup', function() {
+            if (!($(this).val() == '')) $('#submit').prop("disabled", false)
+            else $("#submit").prop("disabled", true)
+        })
+    </script>
+{% endblock %}

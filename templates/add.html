@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Food
+{% endblock %}
+
+{% block main %}
+    <form action="/add" method="post">
+        <div class="form-group">
+            <input type="hidden" name="action" value="search">
+            <input autocomplete="off" autofocus class="form-control" name="query" placeholder="Search query" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <br>
+    {% if foods != None %}
+        <table class="table table-hover">
+            <thead>
+                <th scope="col">Description</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Calories</th>
+                <th scope="col">Carbohydrate (g)</th>
+                <th scope="col">Protein (g)</th>
+                <th scope="col">Fat (g)</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </thead>
+            <tbody>
+                {% for i in range(0, results) %}
+                <tr>
+                    <td>{{ foods[i]["description"] }}</td>
+                    <td>{{ foods[i]["brand"] }}</td>
+                    <td>{{ foods[i]["calories"] }}</td>
+                    <td>{{ foods[i]["carbs"] }}</td>
+                    <td>{{ foods[i]["protein"] }}</td>
+                    <td>{{ foods[i]["fat"] }}</td>
+                    <td>
+                        <form action="/selection" method="get">
+                            <input type="hidden" name="food" value="{{ foods[i] }}">
+                            <button class="btn" type="submit"><b style="color: rgb(23,107,139);">Log</b></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/add" method="post">
+                            <input type="hidden" name="action" value="favorite">
+                            <input type="hidden" name="food" value="{{ foods[i] }}">
+                            <input type="hidden" name="query" value="{{ query }}">
+                            <button class="btn" type="submit"><span style="color: rgb(23,107,139)">&#x2605</span></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

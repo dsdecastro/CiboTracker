@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Favorite Foods
+{% endblock %}
+
+{% block main %}
+<hr>
+<h3>My Favorite Foods</h3>
+<table class="table table-hover">
+    <thead>
+        <th scope="col">Description</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Calories</th>
+        <th scope="col">Carbohydrate (g)</th>
+        <th scope="col">Protein (g)</th>
+        <th scope="col">Fat (g)</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        {% for i in range(0, results) %}
+        <tr>
+            <td>{{ foods[i]["description"] }}</td>
+            <td>{{ foods[i]["brand"] }}</td>
+            <td>{{ foods[i]["calories"] }}</td>
+            <td>{{ foods[i]["carbs"] }}</td>
+            <td>{{ foods[i]["protein"] }}</td>
+            <td>{{ foods[i]["fat"] }}</td>
+            <td>
+                <form action="/selection" method="get">
+                    <input type="hidden" name="food" value="{{ foods[i] }}">
+                    <button class="btn" type="submit"><b style="color: rgb(23,107,139);">Log</b></button>
+                </form>
+            </td>
+            <td>
+                <form action="/favorites" method="post">
+                    <input type="hidden" name="food" value="{{ foods[i] }}">
+                    <button class="btn" type="submit">
+                        <svg xmlns="/static/x-circle-fill.svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                        </svg>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

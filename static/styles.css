@@ -1,0 +1,85 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .orange
+{
+    color: rgb(232,182,106);
+}
+nav .navbar-brand .yellow
+{
+    color: rgb(255,227,132);
+}
+nav .navbar-brand .green
+{
+    color: rgb(167,179,136);
+}
+nav .navbar-brand .acqua
+{
+    color: rgb(83,128,121);
+}
+nav .navbar-brand .blue
+{
+    color: rgb(23,107,139);
+}
+
+/* Color adjustments for buttons */
+.btn-primary
+{
+    background-color: rgb(23,107,139);
+    border-color: rgb(23,107,139);
+}
+.btn-primary:hover
+{
+    background-color: rgb(18,80,104);
+    border-color: rgb(18,80,104);
+}
+.btn-primary:disabled
+{
+    background-color: rgba(18, 80, 104, 0.75);
+    border-color: rgba(18, 80, 104, 0.75);
+}
+
+main .form-control
+{
+    /* Center form controls */
+    display: inline-block;
+
+    /* Override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* Scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* Center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* Constrain images on small screens */
+    max-width: 100%;
+}
+
+.fixed-width 
+{
+    max-width: 300px;
+    margin: auto;
+    text-align: left;
+}
+
+#pag a
+{
+    color: rgb(23,107,139);
+}
+
+td
+{
+    vertical-align: middle !important;
+}
